@@ -71,11 +71,17 @@ If you don't use `thisArg`, `this` will be `undefined` or the global object depe
 ---
 
 ### ⚙️ Under the Hood (How it works step-by-step)
+
 1\.	The array calls filter(callbackFn)
+
 2\.	Internally, JS creates a new empty array result
+
 3\.	It loops through the original array one item at a time
+
 4\.	For each item, it calls callbackFn(value, index, array)
+
 5\.	If callbackFn returns true, the item is added to the result array
+
 6\.	When loop finishes, result is returned!
 
 ---
@@ -108,7 +114,7 @@ Here's everything your custom `myFilter()` should do:
 
 9\. **Uses `.call(thisArg, ...)` to maintain correct `this`**
 
-10\. And at last, let's not cheat - t**Avoid using native `.filter()` inside**
+10\. And at last, let's not cheat - **Avoid using native `.filter()` inside**
 
 ---
 
@@ -192,10 +198,14 @@ This is saying:
 - why not `.apply()` - it passes arguments as an array. The callback function for filter() expects arguments one by one.
 
 Both .call() and .apply() will work functionally the same, but .call() is:
-•\	More concise.
-•\	Easier to read.
-•\	**Matches callback signature directly.**
-•\	Slightly faster in most engines (minor perf difference).
+
+1\.	More concise.
+
+2\.	Easier to read.
+
+3\.	**Matches callback signature directly.**
+
+4\.	Slightly faster in most engines (minor perf difference).
 
 ---
 
