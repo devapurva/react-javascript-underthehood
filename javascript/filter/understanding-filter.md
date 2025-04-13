@@ -24,22 +24,6 @@ console.log(evens); // [2, 4]
 
 - **thisArg** *(optional)*: Value to use as `this` when executing `callbackFn`.
 
-```js
-
-const obj = { threshold: 5 };
-
-const numbers = [1, 10, 4, 7];
-
-const result = numbers.filter(function (num) {
-
-  return num > this.threshold;
-
-}, obj);
-
-console.log(result); // [10, 7]
-
-```
-
 ---
 
 ## 2. What is `thisArg`?
