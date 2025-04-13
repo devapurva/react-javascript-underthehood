@@ -1,4 +1,4 @@
-# 🚀 react-javascript-underthehood
+# 🚀 React & JavaScript UnderTheHood
 
 Welcome to **React-JavaScript-UnderTheHood** — a developer-friendly series that dives deep into the core concepts of JavaScript and React, one topic at a time.
 
@@ -47,7 +47,7 @@ I'll be posting regular breakdowns and updates on:
 Have an idea or topic you’d like covered? Found a bug or typo?  
 PRs and suggestions are welcome!
 
-<p align="center">Made with ❤️ by <a href="https://www.linkedin.com/in/apurvawadekar/">Apurva</a></p>
+<p align="center">Made with ❤️ by <a target="_blank" href="https://www.linkedin.com/in/apurvawadekar/">Apurva</a></p>
 
 ---
 
