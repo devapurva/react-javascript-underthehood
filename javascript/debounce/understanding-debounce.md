@@ -1,6 +1,6 @@
 # 🧠 Understanding `debounce()` and Building Your Own
 
-##1\. What is debounce() ?
+## 1\. What is debounce() ?
 ------------------------------
 
 Imagine you're typing into a search bar. You don't want a function (like an API call) to fire *every single keystroke*. Instead, you want to wait until you've paused typing for a bit --- *then* run the function. That's debounce! It's like saying: "Wait till the user stops doing stuff... then go ahead."
@@ -19,7 +19,7 @@ Use-cases include:
 
 ---
 
-##2\. 🧠 How Does `debounce()` Work?
+## 2\. 🧠 How Does `debounce()` Work?
 ----------------------------------------
 
 -   You wrap a function inside a debounce() call.
@@ -49,7 +49,7 @@ debouncedLog();
 
 ---
 
-##3\. ✅ Key Features to Implement AKA ✅ Checklist for Mimicking `debounce()`
+## 3\. ✅ Key Features to Implement AKA ✅ Checklist for Mimicking `debounce()`
 ------------------------------------------------------------------------------
 
 1\.  Accepts a callback function.
@@ -72,7 +72,7 @@ debouncedLog();
 
 ---
 
-##4\. Custom Implementation `debounce()`:
+## 4\. Custom Implementation `debounce()`:
 -------------------------------------------
 
 ### Here's a simpler version - 
@@ -149,7 +149,7 @@ export default function debounce(func, wait, immediate = false) {
 
 ---
 
-##5\. 🔍 Understanding fn.apply(context, args)
+## 5\. 🔍 Understanding fn.apply(context, args)
 --------------------------------------------------
 
 We use .apply() to:
@@ -164,7 +164,7 @@ Because you might lose the this context or miss arguments passed to the debounce
 
 ---
 
-##6\. 🧪 Optional Enhancement: Immediate Execution
+## 6\. 🧪 Optional Enhancement: Immediate Execution
 ----------------------------------------------------
 
 You can support an optional third argument --- immediate: true --- that fires the function *immediately* on the first call, then blocks repeated calls until the delay is over.
@@ -194,7 +194,7 @@ function debounce(fn, delay, immediate = false) {
 
 ---
 
-##7\. 💼 How to Explain in an Interview
+## 7\. 💼 How to Explain in an Interview
 -----------------------------------------
 
 When explaining your debounce() implementation, you could say:
@@ -211,7 +211,7 @@ When explaining your debounce() implementation, you could say:
 
 * * * * *
 
-##8\. 🚀 Want to Go Further?
+## 8\. 🚀 Want to Go Further?
 ------------------------------
 
 -   Explore throttle() for rate-limiting instead of delaying.
