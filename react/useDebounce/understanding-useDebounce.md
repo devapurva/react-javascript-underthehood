@@ -9,19 +9,22 @@ useDebounce() is like telling React:
 
 So when a value (like a search input) keeps changing rapidly, it waits for things to settle down before doing something with it --- saving performance and avoiding unnecessary work (like repeated API calls).
 
-useDebounce(value, delay) returns a **debounced version** of value that only updates **after** the specified delay has passed **without the value changing again**.
+`useDebounce(value, delay)` returns a **debounced version** of value that only updates **after** the specified delay has passed **without the value changing again**.
 
-### ⚙️ How It Works
+### 🧠 When Should You Use `useDebounce()` ?
 
--   Uses useState to store the debounced value.
+-   ⏳ **Typing delay** before search
 
--   Uses useRef to persist the timer ID across renders.
+-   🛠️ **Avoiding unnecessary state updates**
 
--   Clears previous timer when value or delay changes (important!).
+-   💬 **Live validation with pause**
 
--   Resets the debounce timer whenever value updates.
+-   📦 **Auto-save on pause**
 
--   Returns the **latest stable value** only after the wait time.
+-   📉 **Reducing network/API calls**
+
+
+### Here's an example of `useDebounce()` - 
 
 ```js
 
@@ -52,22 +55,23 @@ function SearchComponent() {
 
 ```
 
-### 🧠 When Should You Use `useDebounce()` ?
-----------------------------------------------
-
--   ⏳ **Typing delay** before search
-
--   🛠️ **Avoiding unnecessary state updates**
-
--   💬 **Live validation with pause**
-
--   📦 **Auto-save on pause**
-
--   📉 **Reducing network/API calls**
-
 ---
 
-## 2\. ✅ Checklist for Mimicking `useDebounce()**
+## 2\. ⚙️  Under the Hood (How it works step-by-step)
+
+-   Uses useState to store the debounced value.
+
+-   Uses useRef to persist the timer ID across renders.
+
+-   Clears previous timer when value or delay changes (important!).
+
+-   Resets the debounce timer whenever value updates.
+
+-   Returns the **latest stable value** only after the wait time.
+
+----
+
+## 3\. ✅ Checklist for Mimicking `useDebounce()**
 ----------------------------------------------------
 
 1\.  Accept a value and a delay as arguments.
@@ -86,7 +90,7 @@ function SearchComponent() {
 
 ---
 
-## 3\. 💻 Custom Implementation `useDebounce()`
+## 4\. 💻 Custom Implementation `useDebounce()`
 
 ---------------------------------------------------------
 
@@ -119,7 +123,7 @@ function SearchComponent() {
 
 ---
 
-## 4\.**🧵 Why Use `useRef()` in `useDebounce()` ?
+## 5\. 🧵 Why Use `useRef()` in `useDebounce()` ?
 ---------------------------------------------------------
 
 We use useRef() to store the timeoutId **without triggering re-renders** and to ensure **cleanup** between renders --- helping avoid potential **memory leaks** and unexpected behaviors.
@@ -174,7 +178,7 @@ useRef() ensures your debounce logic is **safe, efficient, and clean**, preventi
 
 ---
 
-## 5\. 🚀 What's Next?
+## 6\. 🚀 What's Next?
 -------------------
 
 -   Build a useThrottle() hook to understand the difference between throttling and debouncing.
