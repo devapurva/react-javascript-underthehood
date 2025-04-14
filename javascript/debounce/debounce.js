@@ -50,6 +50,23 @@ export default function debounce(func, wait, immediate = false) {
 }
 
 
+// debounce without cancel, flush or immediate flag
+
+// function debounce(fn, delay) {
+//   let timerId;
+
+//   return function (...args) {
+//     const context = this;
+
+//     clearTimeout(timerId);
+
+//     timerId = setTimeout(() => {
+//       fn.apply(context, args);
+//     }, delay);
+//   };
+// }
+
+
 // example 1
 
 function logInput(value) {
