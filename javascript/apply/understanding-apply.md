@@ -33,13 +33,13 @@ greet.apply(user, ["JavaScript", "!"]);
 func.apply(thisArg, argsArray)
 ```
 
-### Parameters:
+#### Parameters:
 
 -   thisArg: The value of this provided for the call to func.
 
 -   argsArray: An array or array-like object containing arguments to pass.
 
-### Returns:
+#### Returns:
 
 -   The result of the function invocation.
 
@@ -78,7 +78,7 @@ Array.prototype.slice.apply(arrayLike);
 
 ---
 
-## 5\. 🔍 Under-the-Hood Insight**
+## 5\. 🔍 Under-the-Hood Insight
 ---------------------------------
 
 -   apply() expects an **array-like object**, meaning something with a .length and numeric keys.
