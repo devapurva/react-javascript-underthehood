@@ -203,7 +203,7 @@ Function.prototype.myApply = function(thisArg, argsArr) {
 
 By comparing these variants, you can see that while our comprehensive Variant 4 offers the most detailed control (and is useful in understanding the internal mechanics), the built-in methods (like call) are very well optimized and are preferred in real-world scenarios for simplicity and efficiency.
 
-If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/){:target="_blank"} or [Send me an email](mailto:devapurva94@gmail.com)!
+If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/) or [Send me an email](mailto:devapurva94@gmail.com)!
 
 
 For more details, you can refer to MDN Web Docs on [Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) [Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) and [Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) which explain these methods and their optimizations.
