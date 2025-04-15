@@ -1,4 +1,4 @@
-Below is an extended comparison of the five custom variants of an apply()-like function. Variant 4 is our previously detailed custom implementation. Each variant is explained in terms of what it does, its advantages, and its potential drawbacks concerning correctness, clarity, performance, and memory overhead.
+Below is an extended comparison of the four custom variants of an apply()-like function. Each variant is explained in terms of what it does, its advantages, and its potential drawbacks concerning correctness, clarity, performance, and memory overhead.
 
 ---
 
