@@ -18,7 +18,7 @@ console.log(result); // [1, 2, 3, 4]
 
 ```
 
-⸻
+---
 
 ## 2\. Syntax
 -----------------
@@ -33,7 +33,7 @@ Returns:
 
 - A new array --- the original arr is not modified.
 
-⸻
+---
 
 ## 3\. Common Use Cases
 -------------------------
@@ -54,7 +54,7 @@ const all = nums.concat(more); // [1, 2, 3, 4]
 
 `[1, 2].concat([3], 4, [5, 6]); // [1, 2, 3, 4, 5, 6]`
 
-⸻
+---
 
 ## 4\. 🔍 Under-the-Hood Insight
 ----------------------------------
@@ -73,7 +73,7 @@ console.log(combined[0].key); // 'updated'
 
 - If an argument is not an array, it's added as a single item.
 
-⸻
+---
 
 ## 5\. 🧪 How is `concat()` different from `push()`?
 -----------------------------------------------------
@@ -83,7 +83,7 @@ console.log(combined[0].key); // 'updated'
 | concat() |       ❌ No       |            ✅ Yes           |             ✅ Yes             |
 | push()   |       ✅ Yes      |  ❌ No (returns new length) | ❌ No --- unless using spread or apply |
 
-⸻
+---
 
 ### 🧠 Example Difference:
 
@@ -98,7 +98,7 @@ arr.concat(more); // ['a', 'b', 1, 2] --- flat merge
 arr.push(...more); // ['a', 'b', 1, 2]
 ```
 
-⸻
+---
 
 ## 6\. ✅ Checklist for Mimicking `concat()`
 -------------------------------------------
@@ -125,7 +125,7 @@ If you're recreating your own myConcat():
 
 8\. Don't flatten nested arrays --- only spread top-level arrays
 
-⸻
+---
 
 ## 7\. ⚠️ Edge Cases
 ---------------------
@@ -140,7 +140,7 @@ console.log(result); // [empty, 1, empty, 3]
 ```
 	•	✅ concat() preserves empty slots — unlike some methods like map() or forEach() that skip them.
 
-⸻
+---
 
 2. Non-array, Array-like values
 ```js
@@ -150,7 +150,7 @@ console.log([].concat(arrayLike));
 ```
 	•	❌ It does not treat array-like objects as arrays — they are added as plain objects.
 
-⸻
+---
 
 3. Nested arrays are not flattened
 ```js
@@ -161,7 +161,7 @@ console.log(arr.concat(nested));
 ```
 	•	✅ Only top-level arrays are spread. Nested arrays stay nested.
 
-⸻
+---
 
 4. Using Symbol.isConcatSpreadable
 ```js 
@@ -172,7 +172,7 @@ console.log(arr.concat(custom));
 ```
 	•	✅ You can force non-arrays to be spread if they define Symbol.isConcatSpreadable.
 
-⸻
+---
 
 5. Primitive this value
 ```js
@@ -180,7 +180,7 @@ console.log(Array.prototype.concat.call('hi', ['!']));
 // ['h', 'i', '!']
 ```
 	•	✅ concat() can be called on strings or other primitive values — they are boxed into objects.
-⸻
+---
 
 6. Falsy values as arguments
 ```js 
@@ -188,7 +188,7 @@ console.log([1].concat(null, undefined, false, 0));  // [1, null, undefined, fal
 ```
 	•	✅ All falsy values are treated as values — they’re not filtered or skipped.
 
-⸻
+---
 
 ## 8\. 🧪 Custom Implementation: `Array.prototype.myConcat()`
 -------------------------------------------------------------
@@ -245,7 +245,7 @@ Array.prototype.myConcat = function (...args) {
 
 ```
 
-⸻
+---
 
 🔍 Explanation:
 
@@ -265,7 +265,7 @@ This mimics native behavior closely, including the subtle details like:
 
 - Creating a shallow copy rather than flattening deeply nested arrays
 
-⸻
+---
 
 8. 💼 How to Explain `concat()` in a Technical Interview
 -------------------------------------------------------------
@@ -294,7 +294,7 @@ Rebuilding or explaining concat() in an interview? Here's how to sound confident
 
 → Differentiates behavior from JSON.parse(JSON.stringify(...)).
 
-⸻
+---
 
 🧠 Bonus Points to Mention:
 
@@ -304,7 +304,7 @@ Rebuilding or explaining concat() in an interview? Here's how to sound confident
 
 - Respecting Symbol.isConcatSpreadable is not commonly known, and mentioning it scores you depth points.
 
-⸻
+---
 
 This section helps position you as someone who doesn't just "use" JavaScript --- but truly understands how it works under the hood. 👩‍💻🧠
 
@@ -320,7 +320,7 @@ This section helps position you as someone who doesn't just "use" JavaScript ---
 
 - Try using concat() with array-like objects and arguments
 
-⸻
+---
 
 🧠 With this, you're not just using concat() --- you're understanding why and how it works.
 
