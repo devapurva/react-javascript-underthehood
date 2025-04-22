@@ -138,7 +138,7 @@ const sparse = [, 1, , 3];
 const result = [].concat(sparse);
 console.log(result); // [empty, 1, empty, 3]
 ```
-	•	✅ concat() preserves empty slots — unlike some methods like map() or forEach() that skip them.
+• ✅ concat() preserves empty slots — unlike some methods like map() or forEach() that skip them.
 
 ---
 
@@ -148,7 +148,7 @@ const arrayLike = { 0: 'x', 1: 'y', length: 2 };
 console.log([].concat(arrayLike)); 
 // Output: [{0: 'x', 1: 'y', length: 2}]
 ```
-	•	❌ It does not treat array-like objects as arrays — they are added as plain objects.
+• ❌ It does not treat array-like objects as arrays — they are added as plain objects.
 
 ---
 
@@ -159,7 +159,7 @@ const nested = [3, [4, 5]];
 console.log(arr.concat(nested)); 
 // [1, 2, 3, [4, 5]]
 ```
-	•	✅ Only top-level arrays are spread. Nested arrays stay nested.
+• ✅ Only top-level arrays are spread. Nested arrays stay nested.
 
 ---
 
@@ -170,7 +170,7 @@ const custom = { 0: 'x', 1: 'y', length: 2, [Symbol.isConcatSpreadable]: true };
 console.log(arr.concat(custom)); 
 // [1, 2, 'x', 'y']
 ```
-	•	✅ You can force non-arrays to be spread if they define Symbol.isConcatSpreadable.
+• ✅ You can force non-arrays to be spread if they define Symbol.isConcatSpreadable.
 
 ---
 
@@ -179,14 +179,14 @@ console.log(arr.concat(custom));
 console.log(Array.prototype.concat.call('hi', ['!']));
 // ['h', 'i', '!']
 ```
-	•	✅ concat() can be called on strings or other primitive values — they are boxed into objects.
+• ✅ concat() can be called on strings or other primitive values — they are boxed into objects.
 ---
 
 6. Falsy values as arguments
 ```js 
 console.log([1].concat(null, undefined, false, 0));  // [1, null, undefined, false, 0]
 ```
-	•	✅ All falsy values are treated as values — they’re not filtered or skipped.
+• ✅ All falsy values are treated as values — they’re not filtered or skipped.
 
 ---
 
@@ -323,5 +323,9 @@ This section helps position you as someone who doesn't just "use" JavaScript ---
 ---
 
 🧠 With this, you're not just using concat() --- you're understanding why and how it works.
-
 And more importantly, how to re-implement it from scratch like a true JavaScript dev under the hood.
+
+If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/) or [Send me an email](mailto:devapurva94@gmail.com) !
+For more details, you can refer to MDN Web Docs on [Function.prototype.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat).
+
+---

@@ -228,3 +228,8 @@ Both .call() and .apply() will work functionally the same, but .call() is:
 ---
 
 🧠 With this knowledge, you now understand how JavaScript's functional array methods work behind the scenes --- and can build your own powerful utilities with full confidence!
+
+If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/) or [Send me an email](mailto:devapurva94@gmail.com) !
+For more details, you can refer to MDN Web Docs on [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
+
+---

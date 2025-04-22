@@ -224,4 +224,7 @@ When explaining your debounce() implementation, you could say:
 
 🧠 Now that you understand debounce, you're ready to build efficient, performance-optimized UI logic --- without spamming function calls!
 
+If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/) or [Send me an email](mailto:devapurva94@gmail.com) !
+For more details, you can refer to MDN Web Docs on [Debounce](https://developer.mozilla.org/en-US/docs/Glossary/Debounce).
+
 ---
