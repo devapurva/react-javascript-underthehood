@@ -1,4 +1,4 @@
-import './function-apply';
+import './apply';
 
 describe('Function.prototype.myApply', () => {
   const person = {
