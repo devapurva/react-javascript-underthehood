@@ -1,5 +1,7 @@
 # 🧠 Understanding JavaScript's `Array.prototype.concat()`
 
+**📌 This was asked in a Frontend Developer interview at  Apple.**
+
 ## 1\. What is concat()?
 --------------------------
 
