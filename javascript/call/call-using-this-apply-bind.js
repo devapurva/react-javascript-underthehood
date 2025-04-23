@@ -16,3 +16,6 @@ Function.prototype.myCallusingApply = function(thisArg, ...args) {
   return this.apply(thisArg, args);
 };
 // ✅ Clean and efficient — Uses built-in apply() to spread arguments
+
+
+// Read understanding-call.md to understand which method is more preferable and why. 

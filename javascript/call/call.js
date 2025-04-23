@@ -45,3 +45,4 @@ console.log(sayHello.myCall(null, 'Hey', '?'));
 
 console.log(sayHello.myCall(42, 'Yo', '~'));
 // Expected: "Yo, undefined~" (since 42 gets boxed into an object)
+
