@@ -113,7 +113,7 @@ Array.prototype.myAt = function (index) {
 | Strings | ✅ | Works character-wise |
 | null / undefined | ✅ | Throw TypeError | 
 
-### Why Variant 1 is Recommended: 
+### Why [Variant 1](https://github.com/devapurva/react-javascript-underthehood/blob/main/javascript/at/understanding-at.md#variant-1-recommended) is Recommended: 
 
 #### ✅ `this == null` Check
 
@@ -195,7 +195,9 @@ if (relativeIndex >= len || relativeIndex < 0)
 
 ---
 
-### 🔻 Issues with Variant 2:
+### 🔻 Issues with [Variant 2](https://github.com/devapurva/react-javascript-underthehood/blob/main/javascript/at/understanding-at.md#variant-2):
+
+Variant 2 is short and readable. It handles negative indexes using math — good idea in theory! It's doesn’t use a loop — performant. Returns undefined for out-of-bounds — kinda. It will work on array literals or array of number/strings - `[1, 2, 3] , ['a', 'b'], [1, '2', true, null]`, but it will fail at the edge cases that `Array.prototype.at()`. Below is the list of issues with this variant: 
 
 1.  **No `this == null` check**
 
@@ -244,7 +246,7 @@ if (relativeIndex >= len || relativeIndex < 0)
 
 ### TL;DR: Summary Table | Comparison Table
 
-| Feature | Native `.at()` | Variant 1 ✅ | Variant 2 ❌ |
+| Feature | Native `.at()` | [Variant 1](https://github.com/devapurva/react-javascript-underthehood/blob/main/javascript/at/understanding-at.md#variant-1-recommended) ✅ | [Variant 2](https://github.com/devapurva/react-javascript-underthehood/blob/main/javascript/at/understanding-at.md#variant-2) ❌ |
 | :---: | :---: | :---: | :---: |
 | Negative index support | ✅ | ✅ | ✅ (partially) |
 | Works with strings | ✅ | ✅ | ❌ |
