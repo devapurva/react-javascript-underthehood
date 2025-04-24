@@ -1,4 +1,4 @@
-🧠 Understanding JavaScript's `Array.prototype.at()`
+# 🧠 Understanding JavaScript's `Array.prototype.at()`
 
 ---
 
