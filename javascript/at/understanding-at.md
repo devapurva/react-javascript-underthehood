@@ -2,7 +2,9 @@
 
 ---
 
-1\. What is `at()`?
+    📌Note: There are lot of nuances that `at()` handles internally. I've tried to deep dive into various edge cases. This took me a while to write, and I thought you guys might also skip through few sections so I've added TL;DR table for quick revision.
+
+## 1\. What is `at()`?
 -------------------
 
 The `at()` returns the element at a given index in an array. It supports positive and negative indices. It lets you fetch elements from the end of an array without needing `arr[arr.length - 1]`.
@@ -21,7 +23,7 @@ arr.at(5);   // undefined
 
 ---
 
-2\. Syntax
+## 2\. Syntax
 ----------
 
 ```js
@@ -33,7 +35,7 @@ arr.at(index)
 -   **Returns**: The element at the given index, or `undefined` if out of bounds.
 
 **🔍 Why do we need at() when we already have arr[index]?**
-Because arr[index] doesn’t support negative numbers cleanly.
+-   Because arr[index] doesn’t support negative numbers cleanly.
 
 ```js
 const arr = ['a', 'b', 'c'];
@@ -46,75 +48,13 @@ arr.at(-1); // 'c' ✅
 ```
 
 ---
-3\. 🔍 Key Implementation Details
----------------------------------
 
-### ✅ `this == null` Check
-
--   Ensures that the method isn't called on `null` or `undefined`.
-
--   Throws a consistent `TypeError`, just like native methods do.
-
-### ✅ Coercing `this` with `Object(this)`
-
--   Allows support for **strings**, **arguments**, or any array-like objects.
-
--   Makes the method polyfill-safe and spec-compliant.
-
--   **Polyfill-safe** means it behaves like the native `.at()` method and works reliably across built-in types and environments. For example:
-
-```
-Array.prototype.myAt.call('hello', -1); // 'o'
-
-```
-
-### ✅ Ensuring Non-negative Integer Length with `>>> 0`
-
--   Bitwise unsigned right shift ensures `len` is an **unsigned 32-bit integer**.
-
--   Prevents issues when `length` is negative or not a valid integer.
-
-### ✅ Coercing Index to a Valid Integer
-
-```
-const i = Math.trunc(Number(index));
-
-```
-
--   `Number(index)`: Converts string or other values to number.
-
--   `Math.trunc`: Removes any fractional part.
-
--   Prevents unwanted behavior like rounding up.
-
-### ✅ Negative Index Handling
-
-```
-const relativeIndex = i < 0 ? len + i : i;
-
-```
-
--   Negative values start from the end of the array.
-
--   Mirrors native `.at()` behavior.
-
-### ✅ Bounds Check
-
-```
-if (relativeIndex >= len || relativeIndex < 0)
-
-```
-
--   Returns `undefined` if the final index is out of array bounds.
-
--   Matches behavior of native `.at()`.
-
-* * * * *
-
-4\. 🛠️ Custom Implementation
+## 3\. 🛠️ Custom Implementation
 -----------------------------
 
-```
+### Variant 1 (Recommended)
+
+```js
 /**
  * @param {number} index
  * @return {any | undefined}
@@ -138,12 +78,11 @@ Array.prototype.myAt = function (index) {
 
 ```
 
-* * * * *
+---
 
-5\. 🚫 Alternate Version (What's Wrong With It?)
-------------------------------------------------
+### Variant 2
 
-```
+```js
 /**
  * @param {number} index
  * @return {any | undefined}
@@ -158,8 +97,105 @@ Array.prototype.myAt = function (index) {
 };
 
 ```
+## 4\. 🔍 Key Implementation Details & Code Deep Dive
+---------------------------------
 
-### 🔻 Issues:
+**🧠 Behavior Summary**
+
+| index | arr.at(index) | Description|
+| :----: | :----: | :----: |
+| 0 | First item | Same as arr[0] |
+| -1 | Last item | Negative indexing |
+| -2 | Second-last | Like Python's [-2] |
+| `>= arr.length` | undefined | Out of bounds |
+| `< -arr.length` | undefined | Out of bounds |
+| Sparse arrays | ✅ | Preserves holes |
+| Strings | ✅ | Works character-wise |
+| null / undefined | ✅ | Throw TypeError | 
+
+### Why Variant 1 is Recommended: 
+
+#### ✅ `this == null` Check
+
+-   Ensures that the method isn't called on `null` or `undefined`.
+-   Throws a consistent `TypeError`, just like native methods do.
+
+#### ✅ Coercing `this` with `Object(this)`
+
+-   Allows support for **strings**, **arguments**, or any array-like objects.
+-   Makes the method polyfill-safe and spec-compliant.
+-   **Polyfill-safe** means it behaves like the native `.at()` method and works reliably across built-in types and environments. For example:
+```js
+Array.prototype.myAt.call('hello', -1); // 'o'
+```
+
+#### ✅ Ensuring Non-negative Integer Length with `>>> 0`
+
+-   Bitwise unsigned right shift ensures `len` is an **unsigned 32-bit integer**.
+-   Prevents issues when `length` is negative or not a valid integer.
+
+```js
+[].length         // 0
+'John'.length   // 4
+
+const weird = {
+  0: 'a',
+  1: 'b',
+  length: -3 // 🤯 this is allowed at runtime!
+};
+
+console.log(weird.length); // -3
+
+// JS lets you define any .length, including:
+// •	-3 (negative)
+// •	3.14 (float)
+// •	'10' (string
+```
+
+#### ✅ Coercing Index to a Valid Integer
+
+```js
+const i = Math.trunc(Number(index));
+```
+
+-   `Number(index)`: Converts string or other values to number.
+-   `Math.trunc`: Removes any fractional part.
+-   Prevents unwanted behavior like rounding up. Fo example:
+
+```js
+const arr = ['a', 'b', 'c'];
+
+console.log(arr.myAt('2'));     // 'c'
+console.log(arr.myAt(true));    // 'b'
+console.log(arr.myAt(1.9));     // 'b'
+console.log(arr.myAt(null));    // 'a'
+console.log(arr.myAt(undefined)); // undefined
+console.log(arr.myAt('abc'));   // undefined
+console.log(arr.myAt(-1));      // 'c'
+console.log(arr.myAt(-5));      // undefined
+```
+
+#### ✅ Negative Index Handling
+
+```js
+const relativeIndex = i < 0 ? len + i : i;
+
+```
+-   Negative values start from the end of the array.
+-   Mirrors native `.at()` behavior.
+
+#### ✅ Bounds Check
+
+```js
+if (relativeIndex >= len || relativeIndex < 0)
+
+```
+-   Returns `undefined` if the final index is out of array bounds.
+-   Matches behavior of native `.at()`.
+
+---
+
+### 🔻 Issues with Variant 2:
 
 1.  **No `this == null` check**
 
@@ -189,79 +225,73 @@ Array.prototype.myAt = function (index) {
 
     -   No explicit `return undefined` on invalid access --- this can confuse readers or analyzers.
 
-* * * * *
+7.  **Does NOT preserve holes in sparse arrays**
 
-6\. 🧪 Test Cases to Verify Behavior
-------------------------------------
+    ```js
+    const arr = [1,,3];
+    console.log(arr.myAt(1)); // ❌ returns undefined even if it’s a hole, but you won’t know it’s a hole
+    ```
+    - This may be acceptable, but it’s a mismatch if you’re trying to spec-match or analyze behavior as per MDN and ECMA Script.
 
-```
-[1, 2, 3].myAt(0);      // 1
-[1, 2, 3].myAt(2);      // 3
-[1, 2, 3].myAt(-1);     // 3
-[1, 2, 3].myAt(-3);     // 1
-[1, 2, 3].myAt(5);      // undefined
-[1, 2, 3].myAt(-4);     // undefined
+8.  **Fails when this is not an actual array**
 
-"hello".myAt(1);        // 'e'
-"hello".myAt(-1);       // 'o'
+    ```js
+    Array.prototype.myAt.call('Apurva', -1); // ❌ TypeError or weird result
+    ```
+    - Native .at() works on strings, array-like objects, even function arguments.
+    - This implementation assumes this.length exists and is valid.
+    - ❌ No check for null, undefined, or primitive this binding
 
-({0: 'a', 1: 'b', length: 2}).myAt(1); // 'b'
+### TL;DR: Summary Table | Comparison Table
 
-```
-
-* * * * *
-
-7\. 📊 Comparison Table
------------------------
-
-| Feature | Native `.at()` | `myAt()` ✅ | Flawed Version ❌ |
-| --- | --- | --- | --- |
+| Feature | Native `.at()` | Variant 1 ✅ | Variant 2 ❌ |
+| :---: | :---: | :---: | :---: |
 | Negative index support | ✅ | ✅ | ✅ (partially) |
 | Works with strings | ✅ | ✅ | ❌ |
-| Coerces `this` context | ✅ | ✅ | ❌ |
+| Works on array-like | ✅ | ✅ | ❌ |
 | Coerces index to number | ✅ | ✅ | ❌ |
+| bounds handling (null/undefined) | ✅ | ✅ | ❌ |
+| Handles holes in sparse arrays |  ✅ | ✅ | ❌ |
+| Coerces `this` context | ✅ | ✅ | ❌ |
 | Rejects invalid `this` | ✅ | ✅ | ❌ |
-| Proper bounds handling | ✅ | ✅ | ❌ |
-| Returns `undefined` correctly | ✅ | ✅ | ❌ (implicit) |
 
-* * * * *
+---
 
-8\. ⚠️ Edge Case Scenarios
---------------------------
+## 5\. 🧪 Test Cases to Verify Behavior
+------------------------------------
 
-### 🧪 Sparse Arrays
+```js
+// ✅ Basic positive index
+console.log([10, 20, 30].myAt(0));   // 10
 
-```
-[ , , 'x'].myAt(2);     // 'x'
-[ , , 'x'].myAt(0);     // undefined (hole is preserved)
+// ✅ Basic negative index
+console.log([10, 20, 30].myAt(-1));  // 30
 
-```
+// ✅ Out-of-bounds
+console.log([1, 2, 3].myAt(5));      // undefined
+console.log([1, 2, 3].myAt(-4));     // undefined
 
-### 🧪 Strings
+// ✅ Works on strings
+console.log([...'Apurva'].myAt(-1)); // 'a'
+console.log('Apurva'.myAt(0));       // 'A'
 
-```
-"hello".myAt(-1);       // 'o'
-"world".myAt(0);        // 'w'
+// ✅ Sparse arrays
+const sparse = [1, , 3];
+console.log(sparse.myAt(1));         // undefined (because it's a hole)
+console.log(1 in sparse);            // false — confirms it's a hole
 
-```
-
-### 🧪 Array-like Objects
-
-```
-Array.prototype.myAt.call({0: 'a', 1: 'b', length: 2}, 1); // 'b'
-
-```
-
-### 🧪 Boxed Primitives
-
-```
-Array.prototype.myAt.call(new String('foo'), -1); // 'o'
+// ✅ Non-array-like
+try {
+  Array.prototype.myAt.call(null, 0); // throws TypeError
+} catch (e) {
+  console.log(e.message); // 'myAt called on null or undefined'
+}
 
 ```
 
-* * * * *
+---
 
-9\. 🏎️ Performance Notes
+## 6\. 🏎️ Performance Notes
 -------------------------
 
 -   **Efficient** for small to medium-sized arrays --- no iteration involved.
@@ -272,9 +302,9 @@ Array.prototype.myAt.call(new String('foo'), -1); // 'o'
 
 -   Avoid calling `.myAt()` on non-numeric or user-defined dynamic `length` values without safeguards.
 
-* * * * *
+---
 
-10\. 🎓 How to Explain in Interviews
+## 7\. 🎓 How to Explain in Interviews
 ------------------------------------
 
 -   "I started by validating the context using `this == null` and coercing with `Object(this)`."
@@ -285,9 +315,9 @@ Array.prototype.myAt.call(new String('foo'), -1); // 'o'
 
 -   "I also accounted for edge cases like sparse arrays, strings, and user-defined array-likes."
 
-* * * * *
+---
 
-11\. 🚀 What's Next?
+## 8\. 🚀 What's Next?
 --------------------
 
 -   Rebuild `find()`, `findIndex()` or `includes()` with edge-case handling.
@@ -298,6 +328,9 @@ Array.prototype.myAt.call(new String('foo'), -1); // 'o'
 
 -   Create a mini polyfill library of commonly used array utilities.
 
-* * * * *
+---
 
-Let me know if you'd like a carousel, visual breakdown, or quiz for `.at()` next!
+If you need further clarification or more examples, feel free to ask me on [LinkedIn](https://www.linkedin.com/in/apurva-wadekar/) or [Send me an email](mailto:devapurva94@gmail.com) !
+For more details, you can refer to MDN Web Docs on [Function.prototype.at()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at).
+
+---
