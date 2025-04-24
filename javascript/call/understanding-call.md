@@ -156,6 +156,22 @@ Function.prototype.myCall = function (thisArg, ...argArray) {
 
 - Executes the function and removes the temporary key afterward
 
+**📦 Works with:**
+	•	Primitive thisArg like numbers/strings/booleans ✅
+	•	null or undefined in non-strict mode ✅
+	•	Any number of arguments ✅
+	•	Returns correct result ✅
+
+⸻
+
+**🔍 Extra Notes**
+	•	We use Symbol() to avoid overwriting any existing key on the object.
+	•	Unlike bind(), call() executes the function immediately.
+	•	If you were in strict mode, thisArg would remain null/undefined, but in our custom version, we’re mimicking non-strict mode, like native behavior.
+
+⸻
+
+
 ---
 
 ## 7\. ⚖️ Alternate Ways to Mimic `call()`
