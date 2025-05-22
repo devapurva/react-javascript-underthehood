@@ -1,0 +1,46 @@
+############################################
+# Core Node
+############################################
+node_modules/          # ⬅ never commit deps
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+############################################
+# Build / transpile output
+############################################
+dist/
+build/
+*.tsbuildinfo          # TypeScript incremental files
+playground/.cache/
+
+############################################
+# Test artifacts (Jest, coverage, snapshots)
+############################################
+coverage/
+*.lcov
+jest-test-results.json
+*.snap                 # Jest snapshot files
+
+############################################
+# Env & secrets
+############################################
+.env
+.env.*                 # .env.dev, .env.local, etc.
+
+############################################
+# Editor-specific folders
+############################################
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+############################################
+# OS / misc
+############################################
+.DS_Store
+Thumbs.db
