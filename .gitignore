@@ -1,7 +1,7 @@
 ############################################
 # Core Node
 ############################################
-/node_modules          # ⬅ never commit deps
+/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -10,18 +10,20 @@ pnpm-debug.log*
 ############################################
 # Build / transpile output
 ############################################
-dist/
-build/
-*.tsbuildinfo          # TypeScript incremental files
-playground/.cache/
+/dist
+/build
+# TypeScript incremental files
+/*.tsbuildinfo          
+/playground/.cache/
 
 ############################################
 # Test artifacts (Jest, coverage, snapshots)
 ############################################
-coverage/
+/coverage
 *.lcov
 jest-test-results.json
-*.snap                 # Jest snapshot files
+# Jest snapshot files
+*.snap                 
 
 ############################################
 # Env & secrets
@@ -32,8 +34,8 @@ jest-test-results.json
 ############################################
 # Editor-specific folders
 ############################################
-.vscode/
-.idea/
+/.vscode
+/.idea
 *.suo
 *.ntvs*
 *.njsproj
