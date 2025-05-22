@@ -1,4 +1,4 @@
-import './filter';
+import './02.filter';
 
 const isEven = (element, index) => element % 2 === 0;
 const isOdd = (element, index) => element % 2 === 1;
